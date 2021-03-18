@@ -1,0 +1,212 @@
+#:import facade plyer.gyroscope
+
+# Menu item in the DrawerList list.
+<ItemDrawer>:
+    theme_text_color: 'Custom'
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: 'Custom'
+        text_color: root.text_color
+
+# From plyer gyroscope example
+<GyroscopeInterface>:
+    facade: facade
+    orientation: 'vertical'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: '25dp'
+            spacing: '25dp'
+            size_hint_y: None
+            pos_hint: {"center_x": 0.8, "center_y": .5}
+            MDLabel:
+                text: 'Gyroscope test\n'
+            MDLabel:
+                text: 'Rate of rotation'
+            MDLabel:
+                text: 'including drift compensation'
+            MDLabel:
+                text: '(' + str(root.x_calib) + ','
+            MDLabel:
+                text: str(root.y_calib) + ','
+            MDLabel:
+                text: str(root.z_calib) + ')'
+            MDLabel:
+                text: '\nRate of rotation'
+            MDLabel:
+                text: 'w/o drift compensation'
+            MDLabel:
+                text: '(' + str(root.x_speed) + ','
+            MDLabel:
+                text: str(root.y_speed) + ','
+            MDLabel:
+                text: str(root.z_speed) + ')'
+            MDLabel:
+                text: '\nEstimated Drift'
+            MDLabel:
+                text: '(' + str(root.x_drift) + ','
+            MDLabel:
+                text: str(root.y_drift) + ','
+            MDLabel:
+                text: str(root.z_drift) + ')'
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: '30dp'
+            spacing: '30dp'
+            size_hint_y: None
+            adaptive_width: True
+            pos_hint: {"center_x": .5, "center_y": .5}
+            MDRaisedButton:
+                id: enable_button
+                text: 'Enable Sensor'
+                disabled: False
+                on_release:
+                    root.enable()
+                    disable_button.disabled = not disable_button.disabled
+                    enable_button.disabled = not enable_button.disabled
+            MDRaisedButton:
+                id: disable_button
+                text: 'Disable Sensor'
+                disabled: True
+                on_release:
+                    root.disable()
+                    disable_button.disabled = not disable_button.disabled
+                    enable_button.disabled = not enable_button.disabled
+
+# Content of the Navigation Drawer
+<ContentNavigationDrawer>:
+    orientation: 'vertical'
+    padding: '8dp'
+    spacing: '8dp'
+
+    AnchorLayout:
+        anchor_x: 'left'
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: '60dp', '60dp'
+            source: 'data/avatar.png'
+
+    MDLabel:
+        text: 'User Name'
+        font_style: 'Button'
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: 'user.name@gmail.com'
+        font_style: 'Caption'
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDSeparator:
+        height: "1dp"
+
+    ScrollView:
+        DrawerList:
+            ItemDrawer:
+                text: 'Accelerometer'
+                icon: 'axis-arrow'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr1'
+
+            ItemDrawer:
+                text: 'Gyroscope'
+                icon: 'rotate-orbit'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr2'
+
+            ItemDrawer:
+                text: 'About'
+                icon: 'information'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr3'
+
+Screen:
+    MDToolbar:
+        id: toolbar
+        pos_hint: {'top': 1}
+        elevation: 8
+        title: 'Antenna Aligner'
+        left_action_items: [['menu', lambda x: nav_drawer.set_state('open')]]
+
+    NavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: 'scr1'
+                MDBoxLayout:
+                    id: box1
+                    orientation: 'vertical'
+                    padding: '30dp'
+                    spacing: '30dp'
+                    adaptive_width: True
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    size_hint_y: None
+
+                    MDLabel:
+                        id: text1
+                        text: 'Accelerometer test'
+                        halign: 'center'
+
+                    MDLabel:
+                        id: x_label
+                        text: 'X: '
+                        halign: 'center'
+
+                    MDLabel:
+                        id: y_label
+                        text: 'Y: '
+                        halign: 'center'
+
+                    MDLabel:
+                        id: z_label
+                        text: 'Z: '
+                        halign: 'center'
+
+                    MDLabel:
+                        id: accel_status
+                        text: ''
+                        halign: 'center'
+
+                    MDRaisedButton:
+                        id: toggle_button
+                        text: 'Start accelerometer'
+                        on_release: app.do_toggle()
+
+            Screen:
+                name: 'scr2'
+                GyroscopeInterface
+
+            Screen:
+                name: 'scr3'
+                MDBoxLayout:
+                    id: box3
+                    orientation: 'vertical'
+
+                    MDLabel:
+                        id: text2
+                        text: 'Hello World 2'
+                        halign: 'center'
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
