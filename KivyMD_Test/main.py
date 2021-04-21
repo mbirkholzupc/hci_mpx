@@ -15,6 +15,10 @@ from kivymd.uix.list import OneLineIconListItem
 
 from plyer import accelerometer
 
+from lpf import lpf
+
+ENABLE_LPF=True
+LPF_LEN=5
 
 # Extend Kivy classes
 class ItemDrawer(OneLineIconListItem):
@@ -96,6 +100,12 @@ class MainApp(MDApp):
 
         Clock.schedule_interval(self.clock_callback, 1)     # call every 1 second
 
+        # 3 Filters for X, Y and Z
+        self.accel_lpf=[]
+        self.accel_lpf.append(lpf(LPF_LEN))
+        self.accel_lpf.append(lpf(LPF_LEN))
+        self.accel_lpf.append(lpf(LPF_LEN))
+
         return self.screen
 
     def do_toggle(self):
@@ -121,12 +131,29 @@ class MainApp(MDApp):
             self.screen.ids.accel_status.text=status
 
     def get_acceleration(self, dt):
-        val=accelerometer.acceleration[:3]
+        try:
+          val=accelerometer.acceleration[:3]
+        except:
+          val=[0,0,0]
+
+        #if val==(None,None,None):
+        #  val=[0,0,0]
+
+        display=[0,0,0]
+
+        if ENABLE_LPF:
+          display[0]=self.accel_lpf[0].filter(val[0])
+          display[1]=self.accel_lpf[1].filter(val[1])
+          display[2]=self.accel_lpf[2].filter(val[2])
+        else:
+          display[0]=val[0]
+          display[1]=val[1]
+          display[2]=val[2]
 
         if not val == (None, None, None):
-            self.screen.ids.x_label.text="X: " + str(val[0])
-            self.screen.ids.y_label.text="Y: " + str(val[1])
-            self.screen.ids.z_label.text="Z: " + str(val[2])
+            self.screen.ids.x_label.text=f"X: {display[0]:.2f}"
+            self.screen.ids.y_label.text=f"Y: {display[1]:.2f}"
+            self.screen.ids.z_label.text=f"Z: {display[2]:.2f}"
 
     def clock_callback(self, dt):
         self.i = self.i+1
