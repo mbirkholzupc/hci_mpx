@@ -1,4 +1,5 @@
 #:import facade plyer.gyroscope
+#:import facadecmp plyer.compass
 
 # Menu item in the DrawerList list.
 <ItemDrawer>:
@@ -80,6 +81,65 @@
                     disable_button.disabled = not disable_button.disabled
                     enable_button.disabled = not enable_button.disabled
 
+<CompassInterface>:
+    facadecmp: facadecmp
+    orientation: 'vertical'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: '25dp'
+            spacing: '25dp'
+            size_hint_y: None
+            pos_hint: {"center_x": 0.8, "center_y": .5}
+            MDLabel:
+                text: 'Compass test\n'
+            MDLabel:
+                text: 'Heading'
+            MDLabel:
+                text: '('
+            MDLabel:
+                id: heading1_lbl
+                text: '0'
+            MDLabel:
+                text: ','
+            MDLabel:
+                id: heading2_lbl
+                text: '0'
+            MDLabel:
+                text: ','
+            MDLabel:
+                id: heading3_lbl
+                text: '0'
+            MDLabel:
+                text: ')'
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: '30dp'
+            spacing: '30dp'
+            size_hint_y: None
+            adaptive_width: True
+            pos_hint: {"center_x": .5, "center_y": .5}
+            MDRaisedButton:
+                id: enable_button
+                text: 'Enable Sensor'
+                disabled: False
+                on_release:
+                    root.enable()
+                    disable_button.disabled = not disable_button.disabled
+                    enable_button.disabled = not enable_button.disabled
+            MDRaisedButton:
+                id: disable_button
+                text: 'Disable Sensor'
+                disabled: True
+                on_release:
+                    root.disable()
+                    disable_button.disabled = not disable_button.disabled
+                    enable_button.disabled = not enable_button.disabled
+
 # Content of the Navigation Drawer
 <ContentNavigationDrawer>:
     orientation: 'vertical'
@@ -129,11 +189,18 @@
                     root.screen_manager.current = 'scr2'
 
             ItemDrawer:
+                text: 'Compass'
+                icon: 'rotate-orbit'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr3'
+
+            ItemDrawer:
                 text: 'About'
                 icon: 'information'
                 on_release:
                     root.nav_drawer.set_state('close')
-                    root.screen_manager.current = 'scr3'
+                    root.screen_manager.current = 'scr4'
 
 Screen:
     MDToolbar:
@@ -196,6 +263,10 @@ Screen:
 
             Screen:
                 name: 'scr3'
+                CompassInterface
+
+            Screen:
+                name: 'scr4'
                 MDBoxLayout:
                     id: box3
                     orientation: 'vertical'

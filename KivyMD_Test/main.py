@@ -14,6 +14,7 @@ from kivymd.uix.list import OneLineIconListItem
 
 
 from plyer import accelerometer
+from plyer import compass
 
 from lpf import lpf
 
@@ -59,6 +60,41 @@ class GyroscopeInterface(MDBoxLayout):
         if self.facade.rotation_uncalib != empty:
             self.x_speed, self.y_speed, self.z_speed, self.x_drift,\
                 self.y_drift, self.z_drift = self.facade.rotation_uncalib
+
+class CompassInterface(MDBoxLayout):
+
+    heading1 = NumericProperty(1)
+    heading2 = NumericProperty(2)
+    heading3 = NumericProperty(3)
+
+    facadecmp = ObjectProperty()
+
+    def enable(self):
+        self.facadecmp.enable()
+        compass.enable()
+        Clock.schedule_interval(self.get_compassval, 1 / 20.)
+
+    def disable(self):
+        self.facadecmp.disable()
+        compass.disable()
+        Clock.unschedule(self.get_compassval)
+
+    def get_compassval(self, dt):
+        val = compass.field
+
+        #self.ids.heading1_lbl.text=f"HD1"
+        #self.ids.heading2_lbl.text=f"HD2"
+        #self.ids.heading3_lbl.text=f"HD3"
+
+        if val != (None, None, None):
+            self.heading1, self.heading2, self.heading3 = val
+            self.ids.heading1_lbl.text=f"{self.heading1:.2f}"
+            self.ids.heading2_lbl.text=f"{self.heading2:.2f}"
+            self.ids.heading3_lbl.text=f"{self.heading2:.2f}"
+        else:
+            self.ids.heading1_lbl.text=f"None"
+            self.ids.heading2_lbl.text=f"None"
+            self.ids.heading3_lbl.text=f"None"
 
 
 class ContentNavigationDrawer(MDBoxLayout):
