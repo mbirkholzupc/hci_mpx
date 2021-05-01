@@ -1,0 +1,127 @@
+#:import facade plyer.gyroscope
+#:import facadecmp plyer.compass
+
+#:include reference.kv
+#:include training.kv
+#:include checklist.kv
+#:include alignment.kv
+
+# Menu item in the DrawerList list.
+<ItemDrawer>:
+    theme_text_color: 'Custom'
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: 'Custom'
+        text_color: root.text_color
+
+# Content of the Navigation Drawer
+<ContentNavigationDrawer>:
+    orientation: 'vertical'
+    padding: '8dp'
+    spacing: '8dp'
+
+    AnchorLayout:
+        anchor_x: 'left'
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: '60dp', '60dp'
+            source: 'data/avatar.png'
+
+    MDLabel:
+        text: 'User Name'
+        font_style: 'Button'
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: 'user.name@gmail.com'
+        font_style: 'Caption'
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDSeparator:
+        height: "1dp"
+
+    ScrollView:
+        DrawerList:
+            ItemDrawer:
+                text: 'Reference'
+                icon: 'book-open-variant'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr_reference'
+
+            ItemDrawer:
+                text: 'Training'
+                icon: 'certificate-outline'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr_training'
+
+            ItemDrawer:
+                text: 'Installation Checklist'
+                icon: 'format-list-checks'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr_checklist'
+
+            ItemDrawer:
+                text: 'Alignment Helper'
+                icon: 'bullseye-arrow'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr_alignment'
+
+            ItemDrawer:
+                text: 'About'
+                icon: 'information'
+                on_release:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'scr_about'
+
+Screen:
+    MDToolbar:
+        id: toolbar
+        pos_hint: {'top': 1}
+        elevation: 8
+        title: 'RF Toolkit App'
+        left_action_items: [['menu', lambda x: nav_drawer.set_state('open')]]
+
+    NavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: 'scr_reference'
+                ReferencePage
+
+            Screen:
+                name: 'scr_training'
+                TrainingPage
+
+            Screen:
+                name: 'scr_checklist'
+                ChecklistPage
+
+            Screen:
+                name: 'scr_alignment'
+                AntennaAlignmentHelperPage
+
+            Screen:
+                name: 'scr_about'
+                AboutPage
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
