@@ -6,6 +6,9 @@
 #:include checklist.kv
 #:include alignment.kv
 
+#:import tr __main__.tr
+
+
 # Menu item in the DrawerList list.
 <ItemDrawer>:
     theme_text_color: "Custom"
@@ -16,6 +19,14 @@
         icon: root.icon
         theme_text_color: "Custom"  
         text_color: app.theme_cls.text_color
+        
+# Select dialog item confirmation
+<ItemConfirm>
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
 
 # Content of the Navigation Drawer
 <ContentNavigationDrawer>:
@@ -52,7 +63,7 @@
     ScrollView:
         DrawerList:
             ItemDrawer:
-                text: 'Reference'
+                text: tr._('Reference')
                 icon: 'book-open-variant'
                 text_color: app.theme_cls.text_color
                 on_release:
@@ -60,7 +71,7 @@
                     root.screen_manager.current = 'scr_reference'
 
             ItemDrawer:
-                text: 'Training'
+                text: tr._('Training')
                 icon: 'certificate-outline'
                 text_color: app.theme_cls.text_color
                 on_release:
@@ -68,7 +79,7 @@
                     root.screen_manager.current = 'scr_training'
 
             ItemDrawer:
-                text: 'Installation Checklist'
+                text: tr._('Installation Checklist')
                 icon: 'format-list-checks'
                 text_color: app.theme_cls.text_color
                 on_release:
@@ -76,7 +87,7 @@
                     root.screen_manager.current = 'scr_checklist'
 
             ItemDrawer:
-                text: 'Alignment Helper'
+                text: tr._('Alignment Helper')
                 icon: 'bullseye-arrow'
                 text_color: app.theme_cls.text_color
                 on_release:
@@ -84,7 +95,7 @@
                     root.screen_manager.current = 'scr_alignment'
 
             ItemDrawer:
-                text: 'About'
+                text: tr._('About')
                 icon: 'information'
                 text_color: app.theme_cls.text_color
                 on_release:

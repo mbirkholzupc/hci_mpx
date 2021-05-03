@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-03 20:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:147
+msgid "Language"
+msgstr ""
+
+#: main.py:147 main.py:210
+msgid "Settings"
+msgstr ""
+
+#: main.py:188 main.py:206
+msgid "Ok"
+msgstr ""
+
+#: main.py:192
+msgid "Select language"
+msgstr ""
+
+#: appdesign.kv:66
+msgid "Reference"
+msgstr ""
+
+#: appdesign.kv:74
+msgid "Training"
+msgstr ""
+
+#: appdesign.kv:82
+msgid "Installation Checklist"
+msgstr ""
+
+#: appdesign.kv:90
+msgid "Alignment Helper"
+msgstr ""
+
+#: appdesign.kv:98
+msgid "About"
+msgstr ""
+
+#: reference.kv:14
+msgid "Reference Page"
+msgstr ""
