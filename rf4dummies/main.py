@@ -46,17 +46,18 @@ class DrawerList(ThemableBehavior, MDList):
                 break
         instance_item.text_color = self.theme_cls.primary_color
 
-
 # Main Kivy Application
 class MainApp(MDApp):
     def build(self):
         self.i = 0  # clock counter
 
-        self.screen = Builder.load_file('appdesign.kv')
-
         self.theme_cls = ThemeManager()
+        self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
         self.theme_cls.accent_palette = 'Teal'
+
+        self.screen = Builder.load_file('appdesign.kv')
+        self.theme_cls.theme_style = 'Light'    # dirty workaround for toolbar right icons
 
         """
         self.screen.ids.box3.add_widget(
@@ -70,27 +71,18 @@ class MainApp(MDApp):
         Clock.schedule_interval(self.clock_callback, 1)     # call every 1 second
 
         # Build settings menu
-        # TODO: I can't get the callbacks to work when clicking on a menu item.
-        # Online, there seems to be two different API versions that are referenced in
-        # various forums. Unfortunately, if I install the latest KivyMD from master, which
-        # is one of the solutions to the callback problem, it breaks the NavigationLayout.
-        # So, sticking with 0.104.1 for now
-        # The new API version associates the on_release callback with the menu instead of each
-        # menu item
         settings_menu_items = [
           {
             "viewclass": "OneLineListItem",
             "text": f"{item_name}",
             "on_release": lambda x=f"{item_name}": self.settings_menu_callback(x),
-          } for item_name in ['Language', 'Day/Night Mode', 'Other Thing']
+          } for item_name in ['Language', 'Settings']
         ]
         self.settings_menu = MDDropdownMenu(
           caller=self.screen.ids.settings_menu_button,
           items=settings_menu_items,
           width_mult=4,
         )
-        # This is sort of in the new API style. We can delete it once callbacks work
-        #self.settings_menu.bind(on_release=self.settings_menu_callback)
 
         return self.screen
 
@@ -102,10 +94,13 @@ class MainApp(MDApp):
       self.settings_menu.caller = button
       self.settings_menu.open()
 
+    def switch_theme_style(self):
+        self.theme_cls.theme_style = (
+            'Light' if self.theme_cls.theme_style == 'Dark' else 'Dark'
+        )
+        
     def settings_menu_callback(self,instance_menu):
-      # text_item should contain the item that was clicked in case we should handle it here
-      # TODO: This doesn't seem to be getting called. WHY????
-      print(f'{instance_menu}')
+      print(f'{instance_menu}')    
       self.settings_menu.dismiss()
 
 if __name__ == '__main__':
