@@ -102,13 +102,11 @@ class MainApp(MDApp):
       self.settings_menu.caller = button
       self.settings_menu.open()
 
-    def settings_menu_callback(self,instance_menu,instance_menu_items):
+    def settings_menu_callback(self,instance_menu):
       # text_item should contain the item that was clicked in case we should handle it here
       # TODO: This doesn't seem to be getting called. WHY????
-      print('CLOSE')
-      print(f'{instance_menu_item}')
+      print(f'{instance_menu}')
       self.settings_menu.dismiss()
-      print('close cb')
 
 if __name__ == '__main__':
     MainApp().run()

@@ -15,7 +15,7 @@
         id: icon
         icon: root.icon
         theme_text_color: 'Custom'
-        text_color: root.text_color
+        #text_color: app.theme_cls.bg_light
 
 # Content of the Navigation Drawer
 <ContentNavigationDrawer>:
@@ -96,18 +96,18 @@ Screen:
 
         # Unfortunately, this doesn't work because you can't get a hold of the caller explicitly
         # and the app crashes
-        #right_action_items: [['settings', lambda x: app.settings_menu_open_callback(x)]]
+        #right_action_items: [['dots-vertical', lambda x: app.settings_menu_open_callback(x)]]
         # Do this instead:
         MDIconButton:
             id: settings_menu_button
             halign: 'center'
-            icon: 'settings'
+            icon: 'dots-vertical'
             pos_hint: {'top': root.y+0.9, 'x':1}
             on_release: app.settings_menu_open_callback(self)
             theme_text_color: "Custom"
             text_color: app.theme_cls.bg_light
 
-    NavigationLayout:
+    MDNavigationLayout:
         x: toolbar.height
 
         ScreenManager:
