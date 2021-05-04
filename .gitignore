@@ -132,3 +132,6 @@ dmypy.json
 
 # Android logs
 logcat.txt
+
+# Temp files
+*.swp
