@@ -1,7 +1,56 @@
+#:include ref_wavelength.kv
 <RefTab>:
     MDLabel:
         text: root.content_text
         pos_hint: {"center_x": .5, "center_y": .5}
+
+# Source: Based on akivymd's "onboarding" demo
+<ReferenceArticlePicAndText>:
+    source: ""
+    text: ""
+    title: ""
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        Image:
+            source: root.source
+            pos_hint: {"center_x": .5, "y": .5}
+            size_hint: .5,.5
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(10)
+            adaptive_height: True
+            pos_hint: {"center_x": .5, "top": .5}
+            spacing: dp(20)
+            size_hint_x: .8
+
+            canvas.before:
+                Color:
+                    rgba: app.theme_cls.primary_dark
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+
+            MDLabel:
+                text: root.title
+                bold: True
+                size_hint_y: None
+                height: self.texture_size[1]
+                theme_text_color: "Primary"
+                font_style: "H6"
+                halign: "center"
+                valign: "center"
+
+            MDLabel:
+                size_hint_y: None
+                height: self.texture_size[1]
+                theme_text_color: "Primary"
+                font_style: "Body1"
+                halign: "center"
+                valign: "center"
+                text: root.text
 
 <ReferencePage>:
     MDTabs:
@@ -16,8 +65,9 @@
             title: '\n'+tr._('Content')
             icon: 'book-open-variant'
 
-            MDLabel:
-                text: tr._('The main attraction.')
+            # TODO: Find a way to replace this widget at runtime to "navigate" to other pages, if possible,
+            #       or create a new widget that can selectively hide/show content
+            RefWavelengthPage
 
         RefTab:
             title: '\n'+tr._('Tools')
