@@ -53,7 +53,7 @@
         DrawerList:
             ItemDrawer:
                 text: 'Reference'
-                icon: 'book-open-variant'
+                icon: 'bookshelf'
                 text_color: app.theme_cls.text_color
                 on_release:
                     root.nav_drawer.set_state('close')
@@ -92,63 +92,66 @@
                     root.screen_manager.current = 'scr_about'
 
 Screen:
-    MDToolbar:
-        id: toolbar
-        pos_hint: {'top': 1}
-        elevation: 8
-        title: 'RF Toolkit App'
-        theme_text_color: 'Custom'
-        text_color: app.theme_cls.bg_light
-        left_action_items: [['menu', lambda x: nav_drawer.set_state('open')]]
+    MDBoxLayout:
+        orientation: 'vertical'
 
-        # Unfortunately, this doesn't work because you can't get a hold of the caller explicitly
-        # and the app crashes
-        #right_action_items: [["brightness-6", lambda x: app.switch_theme_style()], ["dots-vertical", lambda x: app.settings_menu_open_callback(x)]]
-        # Do this instead:
-        MDIconButton:
-            id: settings_menu_button
-            halign: 'center'
+        MDToolbar:
+            id: toolbar
+            pos_hint: {'top': 1}
+            elevation: 8
+            title: 'RF Toolkit App'
             theme_text_color: 'Custom'
-            icon: 'brightness-6'
-            pos_hint: {'top': root.y+0.9, 'x':1}
-            on_release: app.switch_theme_style()
+            text_color: app.theme_cls.bg_light
+            left_action_items: [['menu', lambda x: nav_drawer.set_state('open')]]
 
-        MDIconButton:
-            id: settings_menu_button
-            halign: 'center'
-            theme_text_color: 'Custom'
-            icon: 'dots-vertical'
-            pos_hint: {'top': root.y+0.9, 'x':1}
-            on_release: app.settings_menu_open_callback(self)
+            # Unfortunately, this doesn't work because you can't get a hold of the caller explicitly
+            # and the app crashes
+            #right_action_items: [["brightness-6", lambda x: app.switch_theme_style()], ["dots-vertical", lambda x: app.settings_menu_open_callback(x)]]
+            # Do this instead:
+            MDIconButton:
+                id: settings_menu_button
+                halign: 'center'
+                theme_text_color: 'Custom'
+                icon: 'brightness-6'
+                pos_hint: {'top': root.y+0.9, 'x':1}
+                on_release: app.switch_theme_style()
 
-    MDNavigationLayout:
-        x: toolbar.height
+            MDIconButton:
+                id: settings_menu_button
+                halign: 'center'
+                theme_text_color: 'Custom'
+                icon: 'dots-vertical'
+                pos_hint: {'top': root.y+0.9, 'x':1}
+                on_release: app.settings_menu_open_callback(self)
 
-        ScreenManager:
-            id: screen_manager
+        MDNavigationLayout:
+            x: toolbar.height
 
-            Screen:
-                name: 'scr_reference'
-                ReferencePage
+            ScreenManager:
+                id: screen_manager
 
-            Screen:
-                name: 'scr_training'
-                TrainingPage
+                Screen:
+                    name: 'scr_reference'
+                    ReferencePage
 
-            Screen:
-                name: 'scr_checklist'
-                ChecklistPage
+                Screen:
+                    name: 'scr_training'
+                    TrainingPage
 
-            Screen:
-                name: 'scr_alignment'
-                AntennaAlignmentHelperPage
+                Screen:
+                    name: 'scr_checklist'
+                    ChecklistPage
 
-            Screen:
-                name: 'scr_about'
-                AboutPage
+                Screen:
+                    name: 'scr_alignment'
+                    AntennaAlignmentHelperPage
 
-        MDNavigationDrawer:
-            id: nav_drawer
-            ContentNavigationDrawer:
-                screen_manager: screen_manager
-                nav_drawer: nav_drawer
+                Screen:
+                    name: 'scr_about'
+                    AboutPage
+
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer

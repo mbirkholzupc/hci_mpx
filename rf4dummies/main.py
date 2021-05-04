@@ -54,7 +54,8 @@ class MainApp(MDApp):
         self.theme_cls = ThemeManager()
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
-        self.theme_cls.accent_palette = 'Teal'
+        # Can't see "Teal" in MDTabs against blue background, so commenting out (defaults to "Amber")
+        #self.theme_cls.accent_palette = 'Teal'
 
         self.screen = Builder.load_file('appdesign.kv')
         self.theme_cls.theme_style = 'Light'    # dirty workaround for toolbar right icons

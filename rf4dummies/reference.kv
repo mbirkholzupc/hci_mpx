@@ -1,14 +1,39 @@
+<RefTab>:
+    MDLabel:
+        text: root.content_text
+        pos_hint: {"center_x": .5, "center_y": .5}
+
 <ReferencePage>:
-    orientation: 'vertical'
+    MDTabs:
+        RefTab:
+            title: '\nIndex'
+            icon: 'table-of-contents'
 
-    MDBoxLayout:
-        orientation: 'vertical'
-
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding: '25dp'
-            spacing: '25dp'
-            size_hint_y: None
-            pos_hint: {"center_x": 0.8, "center_y": .5}
             MDLabel:
-                text: 'Reference Page'
+                text: 'List of subjects. Or would this be better as a side panel on the main Content page?'
+
+        RefTab:
+            title: '\nContent'
+            icon: 'book-open-variant'
+
+            MDLabel:
+                text: 'The main attraction.'
+
+        RefTab:
+            title: '\nTools'
+            icon: 'wrench'
+
+            MDLabel:
+                text: 'Calculators and stuff.'
+        RefTab:
+            title: '\nFavorites'
+            icon: 'star'
+
+            MDLabel:
+                text: 'Nothing to see here.'
+        RefTab:
+            title: '\nSearch'
+            icon: 'magnify'
+
+            MDLabel:
+                text: 'Coming soon.'
