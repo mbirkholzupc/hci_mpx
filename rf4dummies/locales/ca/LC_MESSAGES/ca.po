@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 10:50+0200\n"
+"POT-Creation-Date: 2021-05-04 11:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,13 +53,50 @@ msgstr "Assistent d'alineació"
 msgid "About"
 msgstr "Sobre"
 
+#: reference.kv:9
+msgid "Index"
+msgstr "Índex"
+
+#: reference.kv:13
+msgid ""
+"List of subjects. Or would this be better as a side panel on the main "
+"Content page?"
+msgstr ""
+"Llistat de temes. Potser convendria com a panel al costat de la pàgina "
+"principal?"
+
+#: reference.kv:16
+msgid "Content"
+msgstr "Principal"
+
+#: reference.kv:20
+msgid "The main attraction."
+msgstr "El tema"
+
+#: reference.kv:23
+msgid "Tools"
+msgstr "Eines"
+
+#: reference.kv:27
+msgid "Calculators and stuff."
+msgstr "Calculadores i tal."
+
+#: reference.kv:29
+msgid "Favorites"
+msgstr "Marcadors"
+
+#: reference.kv:33
+msgid "Nothing to see here."
+msgstr "Buit"
+
+#: reference.kv:35
+msgid "Search"
+msgstr "Cercar"
+
 #: reference.kv:39
 msgid "Coming soon."
-msgstr ""
+msgstr "Pròximament"
 
 #: reference.kv:40
 msgid "Reference Page"
 msgstr "Pàgina de referència"
-
-#~ msgid "Settings menu"
-#~ msgstr "Menú d'opcions"
