@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 21:49+0200\n"
+"POT-Creation-Date: 2021-05-05 17:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:146
+#: main.py:87
+msgid "Wavelength"
+msgstr ""
+
+#: main.py:88
+msgid "Polarization"
+msgstr ""
+
+#: main.py:156
 msgid "Language"
 msgstr ""
 
-#: main.py:146 main.py:209
+#: main.py:156 main.py:222
 msgid "Settings"
 msgstr ""
 
-#: main.py:187 main.py:205
+#: main.py:200 main.py:218
 msgid "Ok"
 msgstr ""
 
-#: main.py:191
+#: main.py:204
 msgid "Select language"
 msgstr ""
 
@@ -53,44 +61,38 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: reference.kv:61
+#: appdesign.kv:150
 msgid "Index"
 msgstr ""
 
-#: reference.kv:65
-msgid ""
-"List of subjects. Or would this be better as a side panel on the main "
-"Content page?"
-msgstr ""
-
-#: reference.kv:68
+#: appdesign.kv:160
 msgid "Content"
 msgstr ""
 
-#: reference.kv:76
+#: appdesign.kv:168
 msgid "Tools"
 msgstr ""
 
-#: reference.kv:80
+#: appdesign.kv:172
 msgid "Calculators and stuff."
 msgstr ""
 
-#: reference.kv:82
+#: appdesign.kv:174
 msgid "Favorites"
 msgstr ""
 
-#: reference.kv:86
+#: appdesign.kv:178
 msgid "Nothing to see here."
 msgstr ""
 
-#: reference.kv:88
+#: appdesign.kv:180
 msgid "Search"
 msgstr ""
 
-#: reference.kv:92
+#: appdesign.kv:184
 msgid "Coming soon."
 msgstr ""
 
-#: reference.kv:93
+#: appdesign.kv:185
 msgid "Reference Page"
 msgstr ""
