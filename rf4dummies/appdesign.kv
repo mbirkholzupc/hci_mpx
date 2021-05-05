@@ -142,8 +142,47 @@ Screen:
                 id: screen_manager
 
                 Screen:
+                    id: scr_reference
                     name: 'scr_reference'
-                    ReferencePage
+                    MDTabs:
+                        id: ref_tabs
+                        RefTab:
+                            title: '\n'+tr._('Index')
+                            icon: 'table-of-contents'
+
+                            ScrollView:
+                                MDList:
+                                    id: ref_article_list
+
+                        RefTab:
+                            tab_label_text: 'ContentTab'
+                            id: content_tab
+                            title: '\n'+tr._('Content')
+                            icon: 'book-open-variant'
+
+                            ScrollView:
+                                id: article_container
+                                # This is the id of the item that we can load with content we want to display
+
+                        RefTab:
+                            title: '\n'+tr._('Tools')
+                            icon: 'wrench'
+
+                            MDLabel:
+                                text: tr._('Calculators and stuff.')
+                        RefTab:
+                            title: '\n'+tr._('Favorites')
+                            icon: 'star'
+
+                            MDLabel:
+                                text: tr._('Nothing to see here.')
+                        RefTab:
+                            title: '\n'+tr._('Search')
+                            icon: 'magnify'
+
+                            MDLabel:
+                                text: tr._('Coming soon.')
+                                text: tr._('Reference Page')
 
                 Screen:
                     name: 'scr_training'

@@ -33,10 +33,12 @@ from kivymd.uix.list import OneLineAvatarIconListItem
 from kivy.lang import Observable
 from kivy.properties import StringProperty
 
-from reference import ReferencePage
+from reference import ReferencePage, reference_page_widgets
 from training import TrainingPage
 from checklist import ChecklistPage
 from alignment import AntennaAlignmentHelperPage
+
+from reference import build_ref_index
 
 # https://github.com/tito/kivy-gettext-example/blob/master/main.py
 class Lang(Observable):
@@ -78,6 +80,14 @@ class Lang(Observable):
             
 # Default language
 tr = Lang("en")
+
+# Reference page index/content map - should really go in reference file, but would require
+# turning Lang into a singleton, so let's just shove it here
+reference_index_map = {
+        tr._('Wavelength'): 'ref_wavelength.kv',
+        tr._('Polarization'): 'ref_polarization.kv',
+    }
+
 
 # Extend Kivy classes
 class ItemDrawer(OneLineIconListItem):
@@ -157,6 +167,9 @@ class MainApp(MDApp):
           width_mult=4,
         )
 
+        # Build index on reference page
+        build_ref_index(self,reference_index_map)
+
         return self.screen
 
     def clock_callback(self, dt):
@@ -213,6 +226,26 @@ class MainApp(MDApp):
           )
       self.settings_dialog.open()
 
+    def load_reference_page(self,pagename):
+        # Unload the current article
+        for w in self.screen.ids.article_container.children:
+            self.screen.ids.article_container.remove_widget(w)
+
+        # Load the new one
+        newarticle = reference_page_widgets[pagename.text]
+        self.screen.ids.article_container.add_widget(newarticle)
+
+        # Move to the content tab automatically
+        #self.screen.ids.ref_tabs.switch_tab('\n'+tr._(Content))
+        print(self.screen.ids.ref_tabs.get_tab_list())
+        print(self.screen.ids.ref_tabs.get_tab_list()[0].__dict__)
+        print(self.screen.ids.content_tab)
+        print(self.screen.ids.content_tab.__dict__)
+        #TODO: No idea how to do this. Everything seems to fail, but leaving my attempts
+        #      around for the future when trying this again.
+        #self.screen.ids.ref_tabs.switch_tab(self.screen.ids.content_tab)
+        #self.screen.ids.ref_tabs.switch_tab(self.screen.ids.content_tab,'ContentTab',search_by='text')
+        #self.screen.ids.ref_tabs.switch_tab(self.screen.ids.content_tab)
 
 if __name__ == '__main__':
     MainApp().run()
